@@ -7,7 +7,7 @@
 Summary: Search indexing for Chef
 Name: rubygem-%{gemname}
 Version: 0.10.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -19,7 +19,7 @@ Source4: config.rb
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems
-Requires: rubygem(chef) = 0.10.0
+Requires: rubygem(chef) = %{version}
 BuildRequires: rubygems
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
@@ -30,11 +30,8 @@ Requires(preun): chkconfig
 Requires(preun): initscripts
 Requires(postun): initscripts
 
-
-
 %description
 Search indexing for Chef
-
 
 %prep
 
@@ -107,6 +104,9 @@ fi
 
 
 %changelog
+* Mon Jul 04 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.2-2
+- depend on 0.10.2 chef gems
+
 * Mon Jul 04 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.2-1
 - upstream update
 
