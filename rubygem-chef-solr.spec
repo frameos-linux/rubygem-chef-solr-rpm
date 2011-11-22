@@ -2,16 +2,17 @@
 %define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname chef-solr
-%define geminstdir %{gemdir}/gems/%{gemname}-%{version}
+%define prerelease .rc.2
+%define geminstdir %{gemdir}/gems/%{gemname}-%{version}%{?prerelease}
 
 Summary: Search indexing for Chef
 Name: rubygem-%{gemname}
-Version: 0.10.4
-Release: 1%{?buildstamp}%{?dist}
+Version: 0.10.6
+Release: 0rc2%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
-Source0: http://rubygems.org/downloads/%{gemname}-%{version}.gem
+Source0: http://rubygems.org/downloads/%{gemname}-%{version}%{?prerelease}.gem
 Source1: chef-solr.init
 Source2: chef-solr.sysconfig
 Source3: chef-solr.logrotate
@@ -19,10 +20,10 @@ Source4: config.rb
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems
-Requires: rubygem(chef) = %{version}
+Requires: rubygem(chef) = %{version}%{?prerelease}
 BuildRequires: rubygems
 BuildArch: noarch
-Provides: rubygem(%{gemname}) = %{version}
+Provides: rubygem(%{gemname}) = %{version}%{?prerelease}
 
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -92,11 +93,10 @@ fi
 %defattr(-, root, root, -)
 %{_bindir}/chef-solr
 %{_bindir}/chef-solr-installer
-%{_bindir}/chef-solr-rebuild
-%{gemdir}/gems/%{gemname}-%{version}/
-%doc %{gemdir}/doc/%{gemname}-%{version}
-%{gemdir}/cache/%{gemname}-%{version}.gem
-%{gemdir}/specifications/%{gemname}-%{version}.gemspec
+%{gemdir}/gems/%{gemname}-%{version}%{?prerelease}/
+%doc %{gemdir}/doc/%{gemname}-%{version}%{?prerelease}
+%{gemdir}/cache/%{gemname}-%{version}%{?prerelease}.gem
+%{gemdir}/specifications/%{gemname}-%{version}%{?prerelease}.gemspec
 %config(noreplace) %{_sysconfdir}/sysconfig/chef-solr
 %config(noreplace) %{_sysconfdir}/logrotate.d/chef-solr
 %config(noreplace) %{_sysconfdir}/chef/solr.rb
