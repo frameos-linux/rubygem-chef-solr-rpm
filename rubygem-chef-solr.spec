@@ -7,7 +7,7 @@
 
 Summary: Search indexing for Chef
 Name: rubygem-%{gemname}
-Version: 10.12.0
+Version: 10.14.0
 Release: 1%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
@@ -104,6 +104,9 @@ fi
 
 
 %changelog
+* Mon Sep 10 2012 Sergio Rubio <rubiojr@frameos.org> - 10.14.0-1
+- bumped version 10.14.0
+
 * Wed Dec 14 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.6-1
 - bumped version 0.10.6
 
